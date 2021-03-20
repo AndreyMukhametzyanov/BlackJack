@@ -64,5 +64,12 @@ public class Card {
         return result;
 
     }
+    public static Integer pointsCount (ArrayList<Card> cards){
+
+        return 0;
+    }
+
+
+
 }
 
