@@ -9,5 +9,8 @@ public class Main {
         System.out.println("Количество карт в колоде "+ deck.size() + "шт.");
         var deckShuffle = Card.shuffle(Card.deck());
         System.out.println("Перетасованная колода карт "+ deckShuffle);
+
+        var pullOut = Card.pullOutCard(deckShuffle);
+        System.out.println("Вытащили карту : "+ pullOut);
     }
 }

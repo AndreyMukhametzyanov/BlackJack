@@ -6,7 +6,9 @@ import java.util.*;
 public class Card {
     private final static String[] numbersOfCard = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"}; // номер карты B
     private final static String[] suits = {"♠", "♥", "♦", "♣"}; //масть пики червы крести буби в unicode
+    private final static int length = numbersOfCard.length * suits.length;
     private final static Map<String, Integer> rankMap = new HashMap<>();
+
     {
         rankMap.put("2", 2);
         rankMap.put("3", 3);
@@ -35,10 +37,10 @@ public class Card {
     public String getNumberOfCard() {
         return numberOfCard;
     } // получение конкретной карты
+
     public String getSuit() {
         return suit;
     } // получение конкретной масти
-
 
 
     public static Integer rankOfCard(Card card) { //
@@ -52,27 +54,30 @@ public class Card {
     } //переопределяем метод для вывода
 
 
-    public static List<Card> deck () {// создание колоды
-        List<Card> result = new ArrayList<>(numbersOfCard.length * suits.length);
+    public static List<Card> deck() {// создание колоды
+        List<Card> result = new ArrayList<>(length);
         for (String suit : suits) {
             for (String number : numbersOfCard) {
                 result.add(new Card(number, suit));
             }
         }
         return result;
-
     }
-    public static List<Card> shuffle (List<Card> deck){
+
+    public static List<Card> shuffle(List<Card> deck) { // метод тасующий колоду
         List<Card> shuffleDeck = new ArrayList<>(deck);
         Collections.shuffle(shuffleDeck);
         return shuffleDeck;
     }
-    public static Integer pointsCount (ArrayList<Card> cards){ // метод для подсчета очков
+
+    public static Card pullOutCard(List<Card> deck) { // метод вытаскивает карту и удаляет ее из колоды
+        return deck.remove(length - 1);
+    }
+
+    public static Integer pointsCount(ArrayList<Card> cards) { // метод для подсчета очков
 
         return 0;
     }
-
-
 
 
 }
