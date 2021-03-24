@@ -73,26 +73,19 @@ public class Card {
     public static Card pullOutCard(List<Card> deck) { // метод вытаскивает карту и удаляет ее из колоды
         return deck.remove(length - 1);
     }
-        // я не понимаю как передать в метод массив кард сначала 1 штуку потом 2 потом если надо 3
-        // я понимаю что нужно вытащить карту используя мой метод pullOutCard и записать ее в массив который надо передать на метод
-        // я не понимаю где нужно создать массив который нужно передать в метод подсчета
 
-    public static Integer pointsCount (ArrayList<Card> cards) { // метод для подсчета очков
+
+    public static Integer pointsCount(ArrayList<Card> cards) { // метод для подсчета очков
         int sum = 0;
-        ArrayList<Card> hand = new ArrayList<>(cards);
-        // я думаю что если длинна массива = 1 то есть в массиве есть только 1 элемент
-        // нужно сумме присвоить ранк этого элемента;
-        // если длинна массива = 2 то нужно проверить сумму элементов не равна ли она 21.
-        // если длинна массива = 3 то проверяем если больше 21 то отнимаем 10 ??
-
-        for (Card elem :hand) {
-            if (hand.size()==1){  sum = sum + Card.rankOfCard(elem);}
+        for (int i = 0; i < cards.size(); i++) {
+            sum += rankOfCard(cards.get(i));
+            boolean a = cards.get(i).getNumberOfCard().equals("A");
+            if (a && sum > 21) {
+                sum -= 10;
+            }
         }
-
-
         return sum;
-        }
-
-
-
     }
+
+
+}

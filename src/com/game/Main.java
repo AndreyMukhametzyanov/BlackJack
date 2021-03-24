@@ -8,15 +8,22 @@ public class Main {
         Card card = new Card("2", "♠");
         var deck = Card.deck();
         System.out.println("Исходная колода карт" + deck);
-        System.out.println("Количество карт в колоде "+ deck.size() + "шт.");
+        System.out.println("Количество карт в колоде " + deck.size() + "шт.");
 
         var deckShuffle = Card.shuffle(Card.deck());
-        System.out.println("Перетасованная колода карт "+ deckShuffle);
+        System.out.println("Перетасованная колода карт " + deckShuffle);
 
         var pullOut = Card.pullOutCard(deckShuffle);
-        System.out.println("Вытащили карту : "+ pullOut + " Номиналом " + Card.rankOfCard(pullOut));
+        System.out.println("Вытащили карту : " + pullOut + " Номиналом " + Card.rankOfCard(pullOut));
 
 
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(pullOut);
+        hand.add(pullOut);
+        hand.add(pullOut);
+        System.out.println("Раздал на руки эти карты " + hand);
+
+        System.out.println("У вас " + Card.pointsCount(hand) + " очков");
 
 
     }
