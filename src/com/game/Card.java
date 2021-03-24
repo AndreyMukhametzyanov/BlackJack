@@ -36,7 +36,7 @@ public class Card {
 
     public String getNumberOfCard() {
         return numberOfCard;
-    } // получение номера карты
+    } // получение номера  конкретной карты
 
     public String getSuit() {
         return suit;
