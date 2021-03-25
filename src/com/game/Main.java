@@ -18,9 +18,9 @@ public class Main {
 
 
         ArrayList<Card> hand = new ArrayList<>();
-        hand.add(pullOut);
-        hand.add(pullOut);
-        hand.add(pullOut);
+        hand.add(Card.pullOutCard(deckShuffle));
+        hand.add(Card.pullOutCard(deckShuffle));
+        hand.add(Card.pullOutCard(deckShuffle));
         System.out.println("Раздал на руки эти карты " + hand);
 
         System.out.println("У вас " + Card.pointsCount(hand) + " очков");
