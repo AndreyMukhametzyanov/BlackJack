@@ -1,6 +1,7 @@
 package com.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -24,7 +25,9 @@ public class Main {
         System.out.println("Раздал на руки эти карты " + hand);
 
         System.out.println("У вас " + Card.pointsCount(hand) + " очков");
-
+//   Проверка вытаскивания 3 карт
+//        var pullOutOfCards = Card.pullOutCards(deckShuffle,3);
+//        System.out.println(pullOutOfCards);
 
     }
 }

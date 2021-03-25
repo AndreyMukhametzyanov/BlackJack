@@ -71,7 +71,16 @@ public class Card {
     }
 
     public static Card pullOutCard(List<Card> deck) { // метод вытаскивает карту и удаляет ее из колоды
-        return deck.remove(deck.size()-1);
+        return deck.remove(0);
+    }
+
+    public static ArrayList<Card> pullOutCards(List<Card> deck, int amount) { // вытаскиваем необходимое количество кард
+        ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < amount; i++) {
+                    cards.add(deck.remove(0));
+        }
+//
+        return cards;
     }
 
 
@@ -80,12 +89,12 @@ public class Card {
         for (int i = 0; i < cards.size(); i++) {
             sum += rankOfCard(cards.get(i));
         }
-            for (int j = 0; j < cards.size() ; j++) {
-                String b = cards.get(j).getNumberOfCard();
-                if (b.equals("A") && sum >21) {
-                    sum -= 10;
-                }
+        for (int j = 0; j < cards.size(); j++) {
+            String b = cards.get(j).getNumberOfCard();
+            if (b.equals("A") && sum > 21) {
+                sum -= 10;
             }
+        }
         return sum;
     }
 
