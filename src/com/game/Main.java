@@ -6,7 +6,6 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Card card = new Card("2", "♠");
         var deck = Card.deck();
         System.out.println("Исходная колода карт" + deck);
         System.out.println("Количество карт в колоде " + deck.size() + "шт.");
@@ -28,6 +27,11 @@ public class Main {
 //   Проверка вытаскивания 3 карт
 //        var pullOutOfCards = Card.pullOutCards(deckShuffle,3);
 //        System.out.println(pullOutOfCards);
+
+//        Card[] asd = {new Card("A", "♠"),new Card("A", "♠"),new Card("A", "♠")};
+//        ArrayList<Card> hand2 = new ArrayList<>(Arrays.asList(asd));
+//        System.out.println(Arrays.toString(asd));
+//        System.out.println("У вас " + Card.pointsCount(hand2) + " очков");
 
     }
 }

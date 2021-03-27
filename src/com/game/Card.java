@@ -76,22 +76,30 @@ public class Card {
 
     public static ArrayList<Card> pullOutCards(List<Card> deck, int amount) { // вытаскиваем необходимое количество кард
         ArrayList<Card> cards = new ArrayList<>();
-                for (int i = 0; i < amount; i++) {
-                    cards.add(deck.remove(0));
+        for (int i = 0; i < amount; i++) {
+            cards.add(deck.remove(0));
         }
-//
         return cards;
     }
 
+    public boolean isAce(){
+        return numberOfCard.equals("A");
+    }
 
     public static Integer pointsCount(ArrayList<Card> cards) { // метод для подсчета очков
+        int aceCount = 0;
+        for (Card card :cards) {
+            if (card.isAce()) aceCount++;
+        }
+        if (aceCount==3) return 13;
+
         int sum = 0;
+
         for (int i = 0; i < cards.size(); i++) {
             sum += rankOfCard(cards.get(i));
         }
         for (int j = 0; j < cards.size(); j++) {
-            String b = cards.get(j).getNumberOfCard();
-            if (b.equals("A") && sum > 21) {
+            if (cards.get(j).isAce() && sum > 21) {
                 sum -= 10;
             }
         }
