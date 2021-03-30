@@ -43,7 +43,7 @@ public class Card {
     } // получение конкретной масти
 
 
-    public static Integer rankOfCard(Card card) { //метод для присвоения карте ее значения
+    public static int rankOfCard(Card card) { //метод для присвоения карте ее значения
         String number = card.getNumberOfCard();
         return rankMap.get(number);
     }
@@ -95,16 +95,22 @@ public class Card {
 
         int sum = 0;
 
-        for (int i = 0; i < cards.size(); i++) {
-            sum += rankOfCard(cards.get(i));
+        for (Card card : cards) {
+            sum += rankOfCard(card);
         }
-        for (int j = 0; j < cards.size(); j++) {
-            if (cards.get(j).isAce() && sum > 21) {
+        for (Card card : cards) {
+            if (card.isAce() && sum > 21) {
                 sum -= 10;
             }
         }
         return sum;
     }
 
-
+    public String showCard() {
+        return String.format("[%s%s]", numberOfCard, suit);
+    }
+    public String showHiddenCard() {
+        return String.format("[##]", numberOfCard, suit);
+    } // надо ли оставлять вывод через стриг формат чтоб этот метод хранил в себе поступившие карты?
+    // или я могу return "##"??
 }
