@@ -43,7 +43,7 @@ public class Card {
     } // получение конкретной масти
 
 
-    public static Integer rankOfCard(Card card) { //метод для присвоения карте ее значения
+    public static int rankOfCard(Card card) { //метод для присвоения карте ее значения
         String number = card.getNumberOfCard();
         return rankMap.get(number);
     }
@@ -95,16 +95,30 @@ public class Card {
 
         int sum = 0;
 
-        for (int i = 0; i < cards.size(); i++) {
-            sum += rankOfCard(cards.get(i));
+        for (Card card : cards) {
+            sum += rankOfCard(card);
         }
-        for (int j = 0; j < cards.size(); j++) {
-            if (cards.get(j).isAce() && sum > 21) {
+        for (Card card : cards) {
+            if (card.isAce() && sum > 21) {
                 sum -= 10;
             }
         }
         return sum;
     }
 
+    public String showCard() {
+        return String.format("[%s%s]", numberOfCard, suit);
+    }
+    public String showHiddenCard() {
+        return "[##]";
+    }
 
+    @Override public boolean equals(Object o) {
+        if(o instanceof Card) {
+            Card card = (Card) o;
+            return this.numberOfCard.equals(card.numberOfCard) && this.suit.equals(card.suit);
+        } else {
+            return false;
+        }
+    }
 }
