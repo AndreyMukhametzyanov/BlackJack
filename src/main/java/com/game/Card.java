@@ -110,7 +110,15 @@ public class Card {
         return String.format("[%s%s]", numberOfCard, suit);
     }
     public String showHiddenCard() {
-        return String.format("[##]", numberOfCard, suit);
-    } // надо ли оставлять вывод через стриг формат чтоб этот метод хранил в себе поступившие карты?
-    // или я могу return "##"??
+        return "[##]";
+    }
+
+    @Override public boolean equals(Object o) {
+        if(o instanceof Card) {
+            Card card = (Card) o;
+            return this.numberOfCard.equals(card.numberOfCard) && this.suit.equals(card.suit);
+        } else {
+            return false;
+        }
+    }
 }
