@@ -23,6 +23,7 @@ public class CardTest {
     @Test
     public void rankOfCardTest() {
         Card card = new Card("8", "♠");
+
         Assert.assertEquals(Card.rankOfCard(card), 8);
     }
 
@@ -36,6 +37,7 @@ public class CardTest {
                 excepted.add(new Card(number, suit));
             }
         }
+
         Assert.assertEquals(excepted.toString(), Card.deck().toString());
     }
 
@@ -55,10 +57,10 @@ public class CardTest {
     }
 
     @Test
-    public void pullOutCardsTest() { // не проходит проверки выводит java.lang.AssertionError: Expected :[[2♠], [3♠], [4♠]]  Actual   :[[2♠], [3♠], [4♠]]
+    public void pullOutCardsTest() {
         int count = 3; // сколько кард необходимо вытащить
-        ArrayList<Card> cardsTest = new ArrayList<>();// пустой массив
-        ArrayList<Card> cardsTest2 = new ArrayList<>(Card.deck()); // массив копия колоды
+        List<Card> cardsTest = new ArrayList<>();// пустой массив
+        List<Card> cardsTest2 = new ArrayList<>(Card.deck()); // массив копия колоды
         for (int i = 0; i < count; i++) {
             cardsTest.add(cardsTest2.remove(0));//удаляю из копии и кладу в пустой массив
         }

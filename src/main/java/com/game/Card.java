@@ -1,6 +1,5 @@
 package com.game;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Card {
@@ -25,7 +24,6 @@ public class Card {
         rankMap.put("A", 11);
     }
 
-
     private final String numberOfCard; //для конкретной карты
     private final String suit; // для конкретной масти
 
@@ -42,7 +40,6 @@ public class Card {
         return suit;
     } // получение конкретной масти
 
-
     public static int rankOfCard(Card card) { //метод для присвоения карте ее значения
         String number = card.getNumberOfCard();
         return rankMap.get(number);
@@ -52,7 +49,6 @@ public class Card {
     public String toString() {
         return String.format("[%s%s]", numberOfCard, suit);
     } //переопределяем метод для вывода
-
 
     public static List<Card> deck() {// создание колоды
         List<Card> result = new ArrayList<>(length);
@@ -82,16 +78,16 @@ public class Card {
         return cards;
     }
 
-    public boolean isAce(){
+    public boolean isAce() {
         return numberOfCard.equals("A");
     }
 
-    public static Integer pointsCount(ArrayList<Card> cards) { // метод для подсчета очков
+    public static int pointsCount(ArrayList<Card> cards) { // метод для подсчета очков
         int aceCount = 0;
         for (Card card :cards) {
             if (card.isAce()) aceCount++;
         }
-        if (aceCount==3) return 13;
+        if (aceCount == 3) return 13;
 
         int sum = 0;
 
@@ -109,6 +105,7 @@ public class Card {
     public String showCard() {
         return String.format("[%s%s]", numberOfCard, suit);
     }
+
     public String showHiddenCard() {
         return "[##]";
     }
