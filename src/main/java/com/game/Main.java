@@ -28,6 +28,9 @@ public class Main {
         var pullOutOfCards = Card.pullOutCards(deckShuffle,3);
         System.out.println(pullOutOfCards);
 
+//        ArrayList<Card> hand2 = new ArrayList<>();
+//        hand2= Card.pullOutCards(deckShuffle,3);
+//        System.out.println(hand2);
 //        Card[] asd = {new Card("A", "♠"),new Card("A", "♠"),new Card("A", "♠")};
 //        ArrayList<Card> hand2 = new ArrayList<>(Arrays.asList(asd));
 //        System.out.println(Arrays.toString(asd));

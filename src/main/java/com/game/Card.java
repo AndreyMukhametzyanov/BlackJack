@@ -50,8 +50,8 @@ public class Card {
         return String.format("[%s%s]", numberOfCard, suit);
     } //переопределяем метод для вывода
 
-    public static List<Card> deck() {// создание колоды
-        List<Card> result = new ArrayList<>(length);
+    public static ArrayList<Card> deck() {// создание колоды
+        ArrayList<Card> result = new ArrayList<>(length);
         for (String suit : suits) {
             for (String number : numbersOfCard) {
                 result.add(new Card(number, suit));
@@ -60,8 +60,8 @@ public class Card {
         return result;
     }
 
-    public static List<Card> shuffle(List<Card> deck) { // метод тасующий колоду
-        List<Card> shuffleDeck = new ArrayList<>(deck);
+    public static ArrayList<Card> shuffle(List<Card> deck) { // метод тасующий колоду
+        ArrayList<Card> shuffleDeck = new ArrayList<>(deck);
         Collections.shuffle(shuffleDeck);
         return shuffleDeck;
     }
@@ -70,7 +70,7 @@ public class Card {
         return deck.remove(0);
     }
 
-    public static ArrayList<Card> pullOutCards(List<Card> deck, int amount) { // вытаскиваем необходимое количество кард
+    public static ArrayList<Card> pullOutCards(ArrayList<Card> deck, int amount) { // вытаскиваем необходимое количество кард
         ArrayList<Card> cards = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             cards.add(deck.remove(0));
