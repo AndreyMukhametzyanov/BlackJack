@@ -56,20 +56,8 @@ public class Game {
 
         System.out.printf("Первоначальная ставка %d", defaultBet);
         scoreRender();
+        showHands();  // Вывод рук и подсчет очков в руке игрока
 
-        for (Card card : bot.getHand()) {  // показать руку бота
-            System.out.print(card.showHiddenCard());
-        }
-        System.out.println();
-
-        for (Card card : user.getHand()) { // показать руку игрока
-            System.out.print(card);
-        }
-        System.out.println();
-
-        System.out.printf("Количество очков данной руки:%d %n", Card.pointsCount(user.getHand())); // подсчет очков в руке игрока
-
-                                    // ******** Вычисление победы ************
         String userChoose = userChoose();
         String botChoose = bot.nextMove();
 
@@ -78,50 +66,14 @@ public class Game {
             render();
         }
         System.out.println("Ожидание хода соперника...");
-        waiting((int) ((Math.random()*2)+1)); // рандомные размышления бота
+        waiting((int) ((Math.random() * 2) + 1)); // рандомные размышления бота
 
         if (botChoose.equals("call")) {  // если бот выбрал "Call" добавить карту в его руку
             bot.getHand().add(Card.pullOutCard(deck));
             render();
-            // метод для вывода нового массива из 3 карт
         }
 
-        if (Card.pointsCount(user.getHand()) <= 21) {
-            if (Card.pointsCount(user.getHand()) > Card.pointsCount(bot.getHand())) {
-                user.setMoney(user.getMoney() + bank);
-                bank = 0;
-                render(true);
-                System.out.println("Вы победили");
-            }
-        }
-        if (Card.pointsCount(bot.getHand()) <= 21) {
-            if (Card.pointsCount(user.getHand()) < Card.pointsCount(bot.getHand())) {
-                bot.setMoney(bot.getMoney() + bank);
-                bank = 0;
-                render(true);
-                System.out.println("Соперник победил");
-            }
-        }
-        if ((Card.pointsCount(bot.getHand()) == Card.pointsCount(user.getHand()) || ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand())) > 21))) {
-            bot.setMoney(bot.getMoney() + bank/2);
-            user.setMoney(user.getMoney() + bank/2);
-            bank = 0;
-            render(true);
-            System.out.println("Ничья");
-        }
-        // добавил 2 условия победы когда у одного перебор у другого нет.
-        if ((Card.pointsCount(bot.getHand()) <= 21) && (Card.pointsCount(user.getHand()) > 21)) {
-            bot.setMoney(bot.getMoney() + bank);
-            bank = 0;
-            render(true);
-            System.out.println("Соперник победил");
-        }
-        if ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand()) <= 21)) {
-            user.setMoney(user.getMoney() + bank);
-            bank = 0;
-            render(true);
-            System.out.println("Вы победили");
-        }
+        whoIsWinner(); // метод вычисления победителя
 
         if (bot.getMoney() == 0) { // если остаток на счету бота = 0 то победил игрок
             return "userWin";
@@ -129,7 +81,6 @@ public class Game {
         if (user.getMoney() == 0) { // если остаток на счету игрока = 0 то победил бот
             return "botWin";
         }
-        //                             ************** Окончание логики вычисления победы *********************
 
         scoreRender();
         System.out.println();
@@ -137,8 +88,7 @@ public class Game {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // завершить или продолжить игру
         System.out.printf("Введите 1,чтобы продложить играть %nВведите любой другой символ для выхода%n");
         try {
-            boolean s = !reader.readLine().equals("1");
-            if (s) {
+            if (!reader.readLine().equals("1")) {
                 return "endGame";
             }
         } catch (IOException e) {
@@ -155,8 +105,7 @@ public class Game {
             System.out.println("2) Взять карту");
         }
         try {
-            String s = reader.readLine();
-            switch (s) {
+            switch (reader.readLine()) {
                 case "1":
                     return "fold";
                 case "2":
@@ -214,9 +163,62 @@ public class Game {
             e.printStackTrace();
         }
     }
-    private void scoreRender (){
+
+    private void scoreRender() {
         System.out.println();
         System.out.printf("На счету игрока: %d %n", user.getMoney());
         System.out.printf("На счету соперника: %d %n", bot.getMoney());
+    }
+
+    private void showHands() {
+        for (Card card : bot.getHand()) {  // показать руку бота
+            System.out.print(card.showHiddenCard());
+        }
+        System.out.println();
+
+        for (Card card : user.getHand()) { // показать руку игрока
+            System.out.print(card);
+        }
+        System.out.println();
+        System.out.printf("Количество очков данной руки:%d %n", Card.pointsCount(user.getHand())); // подсчет очков в руке игрока
+    }
+
+    private void whoIsWinner() {
+        if (Card.pointsCount(user.getHand()) <= 21) {
+            if (Card.pointsCount(user.getHand()) > Card.pointsCount(bot.getHand())) {
+                user.setMoney(user.getMoney() + bank);
+                bank = 0;
+                render(true);
+                System.out.println("Вы победили");
+            }
+        }
+        if (Card.pointsCount(bot.getHand()) <= 21) {
+            if (Card.pointsCount(user.getHand()) < Card.pointsCount(bot.getHand())) {
+                bot.setMoney(bot.getMoney() + bank);
+                bank = 0;
+                render(true);
+                System.out.println("Соперник победил");
+            }
+        }
+        if ((Card.pointsCount(bot.getHand()) == Card.pointsCount(user.getHand()) || ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand())) > 21))) {
+            bot.setMoney(bot.getMoney() + bank / 2);
+            user.setMoney(user.getMoney() + bank / 2);
+            bank = 0;
+            render(true);
+            System.out.println("Ничья");
+        }
+        // добавил 2 условия победы когда у одного перебор у другого нет.
+        if ((Card.pointsCount(bot.getHand()) <= 21) && (Card.pointsCount(user.getHand()) > 21)) {
+            bot.setMoney(bot.getMoney() + bank);
+            bank = 0;
+            render(true);
+            System.out.println("Соперник победил");
+        }
+        if ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand()) <= 21)) {
+            user.setMoney(user.getMoney() + bank);
+            bank = 0;
+            render(true);
+            System.out.println("Вы победили");
+        }
     }
 }
