@@ -121,7 +121,7 @@ public class Game {
     }
 
     private void render() {
-        render(true);
+        render(false);
     }
 
     private void render(boolean isFinal) { //отрисовка экрана
@@ -132,19 +132,17 @@ public class Game {
         System.out.printf("В банке: %d %n", bank);
         System.out.println("======================================");
 
-        for (Card card : bot.getHand()) {
-            if (isFinal) {
-                System.out.print(card.showCard());
-            } else System.out.print(card.showHiddenCard());
+        for (String line : concatCards(bot.getHand(), isFinal)) {  // показать руку бота
+            System.out.println(line);
         }
         System.out.println();
         if (isFinal) {
             System.out.printf("Количество очков соперника :%d %n", Card.pointsCount(bot.getHand()));
         }
-
-        for (Card card : user.getHand()) {
-            System.out.print(card);
+        for (String line : concatCards(user.getHand(), true)) {  // показать руку игрока
+            System.out.println(line);
         }
+
         System.out.println();
 
         System.out.printf("Количество очков данной руки:%d %n", Card.pointsCount(user.getHand()));
@@ -171,13 +169,13 @@ public class Game {
     }
 
     private void showHands() {
-        for (Card card : bot.getHand()) {  // показать руку бота
-            System.out.print(card.showHiddenCard());
+        for (String line : concatCards(bot.getHand(), false)) {  // показать руку бота
+            System.out.println(line);
         }
         System.out.println();
 
-        for (Card card : user.getHand()) { // показать руку игрока
-            System.out.print(card);
+        for (String line : concatCards(user.getHand(), true)) {  // показать руку бота
+            System.out.println(line);
         }
         System.out.println();
         System.out.printf("Количество очков данной руки:%d %n", Card.pointsCount(user.getHand())); // подсчет очков в руке игрока
@@ -192,6 +190,7 @@ public class Game {
                 System.out.println("Вы победили");
             }
         }
+
         if (Card.pointsCount(bot.getHand()) <= 21) {
             if (Card.pointsCount(user.getHand()) < Card.pointsCount(bot.getHand())) {
                 bot.setMoney(bot.getMoney() + bank);
@@ -200,6 +199,7 @@ public class Game {
                 System.out.println("Соперник победил");
             }
         }
+
         if ((Card.pointsCount(bot.getHand()) == Card.pointsCount(user.getHand()) || ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand())) > 21))) {
             bot.setMoney(bot.getMoney() + bank / 2);
             user.setMoney(user.getMoney() + bank / 2);
@@ -207,18 +207,36 @@ public class Game {
             render(true);
             System.out.println("Ничья");
         }
-        // добавил 2 условия победы когда у одного перебор у другого нет.
+
         if ((Card.pointsCount(bot.getHand()) <= 21) && (Card.pointsCount(user.getHand()) > 21)) {
             bot.setMoney(bot.getMoney() + bank);
             bank = 0;
             render(true);
             System.out.println("Соперник победил");
         }
+
         if ((Card.pointsCount(bot.getHand()) > 21) && (Card.pointsCount(user.getHand()) <= 21)) {
             user.setMoney(user.getMoney() + bank);
             bank = 0;
             render(true);
             System.out.println("Вы победили");
         }
+    }
+
+    private String[] concatCards(ArrayList<Card> hand, boolean notHidden) { // если notHidden true - открытая карта
+        String[] buffer = new String[9];
+        String s;
+        for (int i = 0; i < buffer.length; i++) {
+            s = "";
+            for (Card card : hand) {
+                if (notHidden) {
+                    s = String.join("   ", s, card.showCard()[i]);
+                } else {
+                    s = String.join("   ", s, card.showHiddenCard()[i]);
+                }
+            }
+            buffer[i] = s;
+        }
+        return buffer;
     }
 }

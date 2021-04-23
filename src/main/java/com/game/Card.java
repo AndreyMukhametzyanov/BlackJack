@@ -100,12 +100,31 @@ public class Card {
         return sum;
     }
 
-    public String showCard() {
-        return String.format("[%s%s]", numberOfCard, suit);
+    public String[] showCard() {
+        String[] cardRender = {
+                              "┌─────────┐",
+                String.format("│ %2s      │",numberOfCard),
+                              "│         │",
+                              "│         │",
+                String.format("│    %s    │",suit),
+                              "│         │",
+                              "│         │",
+                String.format("│      %2s │",numberOfCard),
+                              "└─────────┘"};
+        return cardRender;
     }
 
-    public String showHiddenCard() {
-        return "[##]";
+    public String[] showHiddenCard() {
+        return new String[]{
+                "┌─────────┐",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "└─────────┘",};
     }
 
     @Override public boolean equals(Object o) {
@@ -116,5 +135,4 @@ public class Card {
             return false;
         }
     }
-
 }
