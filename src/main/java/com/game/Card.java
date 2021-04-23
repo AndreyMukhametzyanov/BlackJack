@@ -60,10 +60,8 @@ public class Card {
         return result;
     }
 
-    public static ArrayList<Card> shuffle(List<Card> deck) { // метод тасующий колоду
-        ArrayList<Card> shuffleDeck = new ArrayList<>(deck);
-        Collections.shuffle(shuffleDeck);
-        return shuffleDeck;
+    public static void shuffle(ArrayList<Card> deck) { // метод тасующий колоду
+        Collections.shuffle(deck);
     }
 
     public static Card pullOutCard(List<Card> deck) { // метод вытаскивает карту и удаляет ее из колоды
@@ -118,4 +116,5 @@ public class Card {
             return false;
         }
     }
+
 }

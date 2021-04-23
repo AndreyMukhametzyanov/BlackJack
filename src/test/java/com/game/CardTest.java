@@ -42,10 +42,11 @@ public class CardTest {
 
     @Test
     public void shuffleTest() {
-        List<Card> cards = Card.deck();
-        List<Card> shuffled_cards = Card.shuffle(cards);
+        ArrayList<Card> cards = Card.deck();
+        int count = cards.size();
+        Card.shuffle(cards);
 
-        Assert.assertEquals(cards.size(), shuffled_cards.size());
+        Assert.assertEquals(cards.size(), count);
     }
 
     @Test
