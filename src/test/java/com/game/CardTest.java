@@ -88,14 +88,32 @@ public class CardTest {
     @Test
     public void showCardTest() {
         Card card = new Card("8", "♠");
-
-        Assert.assertEquals(card.showCard(), "[8♠]");
+        String[] exp = {
+                "┌─────────┐",
+                "│  8      │",
+                "│         │",
+                "│         │",
+                "│    ♠    │",
+                "│         │",
+                "│         │",
+                "│       8 │",
+                "└─────────┘"};
+        Assert.assertArrayEquals(card.showCard(),exp);
     }
 
     @Test
     public void showHiddenCardTest() {
         Card card = new Card("8", "♠");
-
-        Assert.assertEquals(card.showHiddenCard(), "[##]");
+        String[] exp = {
+                "┌─────────┐",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "│░░░░░░░░░│",
+                "└─────────┘",};
+        Assert.assertArrayEquals(card.showHiddenCard(), exp);
     }
 }
